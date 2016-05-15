@@ -5,7 +5,7 @@ import com.alesarcode.rssreader.domain.DefaultSubscriber;
 import com.alesarcode.rssreader.domain.Feed;
 import com.alesarcode.rssreader.domain.FeedItem;
 import com.alesarcode.rssreader.domain.exceptions.DefaultErrorBundle;
-import com.alesarcode.rssreader.domain.interactors.GetNewEntriesInteractor;
+import com.alesarcode.rssreader.domain.interactors.Interactor;
 import com.alesarcode.rssreader.presentation.converters.DomainToPresentationMapper;
 import com.alesarcode.rssreader.presentation.model.Model;
 import com.alesarcode.rssreader.presentation.mvp.views.EntryListView;
@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import rx.Subscriber;
 
@@ -25,10 +26,10 @@ import rx.Subscriber;
  */
 public class EntryListPresenter extends BasePresenter<EntryListView> {
 
-    private final GetNewEntriesInteractor mInteractor;
+    private final Interactor mInteractor;
 
     @Inject
-    public EntryListPresenter(GetNewEntriesInteractor interactor) {
+    public EntryListPresenter(@Named("feedList") Interactor interactor) {
         this.mInteractor = interactor;
     }
 

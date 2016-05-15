@@ -6,6 +6,7 @@ import com.alesarcode.rssreader.domain.Feed;
 import com.alesarcode.rssreader.domain.FeedItem;
 import com.alesarcode.rssreader.domain.exceptions.DefaultErrorBundle;
 import com.alesarcode.rssreader.domain.interactors.GetEntryDetailInteractor;
+import com.alesarcode.rssreader.domain.interactors.Interactor;
 import com.alesarcode.rssreader.presentation.converters.DomainToPresentationMapper;
 import com.alesarcode.rssreader.presentation.model.Model;
 import com.alesarcode.rssreader.presentation.mvp.views.EntryDetailView;
@@ -14,6 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import rx.Subscriber;
 
@@ -25,10 +27,10 @@ import rx.Subscriber;
  */
 public class EntryDetailsPresenter extends BasePresenter<EntryDetailView> {
 
-    private final GetEntryDetailInteractor mInteractor;
+    private final Interactor mInteractor;
 
     @Inject
-    public EntryDetailsPresenter(GetEntryDetailInteractor interactor) {
+    public EntryDetailsPresenter(@Named("feedDetail") Interactor interactor) {
 
         this.mInteractor = interactor;
     }

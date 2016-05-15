@@ -5,6 +5,7 @@ import com.alesarcode.rssreader.domain.repository.RSSRepository;
 import java.net.URL;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import rx.Observable;
 import rx.Scheduler;
@@ -20,8 +21,9 @@ public class GetNewEntriesInteractor extends Interactor {
     private RSSRepository mRepository;
 
     @Inject
-    public GetNewEntriesInteractor(RSSRepository repository, Scheduler mExecutorScheduler,
-                                   Scheduler mUiScheduler) {
+    public GetNewEntriesInteractor(RSSRepository repository,
+                                   @Named("executor_sch") Scheduler mExecutorScheduler,
+                                   @Named("ui_sch") Scheduler mUiScheduler) {
         super(mExecutorScheduler, mUiScheduler);
         this.mRepository = repository;
     }
