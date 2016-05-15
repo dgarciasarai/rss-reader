@@ -28,6 +28,8 @@ public class DomainToPresentationMapper {
         }
 
         EntryModel entryModel = new EntryModel(item.getId());
+        entryModel.setTitle(item.getTitle());
+        entryModel.setImageUrl(item.getImageUrl());
 
         return entryModel;
     }

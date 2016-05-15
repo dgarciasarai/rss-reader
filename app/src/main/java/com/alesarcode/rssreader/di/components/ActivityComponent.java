@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.alesarcode.rssreader.di.modules.ActivityModule;
 import com.alesarcode.rssreader.di.scopes.PerActivity;
-import com.alesarcode.rssreader.presentation.mvp.views.activities.EntryListActivity;
 
 import dagger.Component;
 
