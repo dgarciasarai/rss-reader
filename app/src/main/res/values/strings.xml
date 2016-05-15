@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RSSReader</string>
+    <string name="default_error_message">There was an application error</string>
+    <string name="entries_not_found">Not entries found in this RSS feed</string>
 </resources>

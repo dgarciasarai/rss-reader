@@ -7,4 +7,14 @@ package com.alesarcode.rssreader.domain;
  * @version %I%
  */
 public class FeedItem {
+
+    private int mId;
+
+    public FeedItem(int id) {
+        this.mId = id;
+    }
+
+    public int getId() {
+        return mId;
+    }
 }
