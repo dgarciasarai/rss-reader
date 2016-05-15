@@ -1,13 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:text="DEMO"
-        android:textSize="40sp"
-        android:gravity="center"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:elevation="0dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-</LinearLayout>
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_detail"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <ImageView
+                android:id="@+id/entry_image"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:fitsSystemWindows="true"
+                tools:ignore="ContentDescription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_detail"
+                android:layout_width="match_parent"
+                android:elevation="0dp"
+                app:layout_collapseMode="pin"
+                android:background="@null"
+                android:layout_height="?attr/actionBarSize" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/view_progress" />
+
+</android.support.design.widget.CoordinatorLayout>

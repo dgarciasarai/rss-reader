@@ -41,7 +41,6 @@ public class EntryListPresenterTest {
     public void testShouldShowLoadingIndicatorOnInitialize() {
         mPresenter.initialize();
         shouldShowLoading();
-        shouldHideRetry();
     }
 
     @Test
@@ -54,10 +53,6 @@ public class EntryListPresenterTest {
     public void testShouldDestroyAllOnDestroyView(){
         this.mPresenter.onViewDestroy();
         shouldUnsubscribeInteractor();
-    }
-
-    private void shouldHideRetry() {
-        verify(mView).hideRetry();
     }
 
     private void shouldRequestEntriesFromInteractor() {

@@ -3,8 +3,6 @@ package com.alesarcode.rssreader.di.modules;
 import android.content.Context;
 
 import com.alesarcode.rssreader.di.scopes.PerActivity;
-import com.alesarcode.rssreader.presentation.navigation.AndroidNavigator;
-import com.alesarcode.rssreader.presentation.navigation.Navigator;
 
 import dagger.Module;
 import dagger.Provides;
@@ -26,9 +24,4 @@ public class ActivityModule {
 
     @Provides @PerActivity
     Context provideActivityContext() { return mContext; }
-
-    @Provides @PerActivity
-    Navigator providesNavigator(AndroidNavigator navigator) {
-        return navigator;
-    }
 }

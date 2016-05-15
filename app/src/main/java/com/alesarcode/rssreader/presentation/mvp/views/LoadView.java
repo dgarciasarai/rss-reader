@@ -21,14 +21,4 @@ public interface LoadView extends View {
      * finishes.
      */
     void hideLoading();
-
-    /**
-     * Shows a view for retrying the loading of data in case of error.
-     */
-    void showRetry();
-
-    /**
-     * Hides the retry view.
-     */
-    void hideRetry();
 }

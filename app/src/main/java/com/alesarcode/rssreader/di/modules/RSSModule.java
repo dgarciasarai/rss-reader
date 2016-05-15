@@ -4,11 +4,13 @@ import com.alesarcode.rssreader.di.scopes.PerActivity;
 import com.alesarcode.rssreader.domain.interactors.GetEntryDetailInteractor;
 import com.alesarcode.rssreader.domain.interactors.GetNewEntriesInteractor;
 import com.alesarcode.rssreader.domain.interactors.Interactor;
+import com.alesarcode.rssreader.domain.repository.RSSRepository;
 
 import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
+import rx.Scheduler;
 
 /**
  * Dagger module that provides feed related collaborators.
@@ -33,7 +35,9 @@ public class RSSModule {
     }
 
     @Provides @PerActivity @Named("feedDetail")
-    Interactor provideGetEntryDetailInteractor(GetEntryDetailInteractor entryDetailInteractor) {
-        return entryDetailInteractor;
+    Interactor provideGetEntryDetailInteractor(RSSRepository repository,
+                                               @Named("executor_sch") Scheduler mExecutorScheduler,
+                                               @Named("ui_sch") Scheduler mUiScheduler) {
+        return new GetEntryDetailInteractor(mItemId, repository, mExecutorScheduler, mUiScheduler);
     }
 }

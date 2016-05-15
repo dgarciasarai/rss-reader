@@ -15,8 +15,6 @@ import javax.inject.Inject;
  */
 public class AndroidNavigator implements Navigator {
 
-    private static final String INTENT_EXTRA_ENTRY_ID = "entry_id";
-
     @Inject
     public AndroidNavigator() {
     }
@@ -24,7 +22,7 @@ public class AndroidNavigator implements Navigator {
     @Override
     public void navigateToEntryDetail(Context context, int id) {
         Intent callingIntent = new Intent(context, EntryDetailActivity.class);
-        callingIntent.putExtra(INTENT_EXTRA_ENTRY_ID, id);
+        callingIntent.putExtra(EntryDetailActivity.INTENT_EXTRA_ENTRY_ID, id);
         context.startActivity(callingIntent);
     }
 }

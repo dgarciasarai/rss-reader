@@ -2,7 +2,10 @@ package com.alesarcode.rssreader.di.modules;
 
 import com.alesarcode.rssreader.RSSReaderApplication;
 import com.alesarcode.rssreader.data.repository.FakeDataSource;
+import com.alesarcode.rssreader.di.scopes.PerActivity;
 import com.alesarcode.rssreader.domain.repository.RSSRepository;
+import com.alesarcode.rssreader.presentation.navigation.AndroidNavigator;
+import com.alesarcode.rssreader.presentation.navigation.Navigator;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -36,6 +39,11 @@ public class ApplicationModule {
     @Provides @Singleton
     RSSRepository providesFeedRepository(FakeDataSource fakeDataSource) {
         return fakeDataSource;
+    }
+
+    @Provides @Singleton
+    Navigator providesNavigator(AndroidNavigator navigator) {
+        return navigator;
     }
 
     @Provides @Named("executor_sch")

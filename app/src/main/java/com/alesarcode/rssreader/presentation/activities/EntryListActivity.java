@@ -3,6 +3,7 @@ package com.alesarcode.rssreader.presentation.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -42,12 +43,10 @@ public class EntryListActivity extends AppCompatActivity implements EntryListVie
 
     @BindView(R.id.rl_progress)
     RelativeLayout progressView;
-    @BindView(R.id.rl_retry)
-    RelativeLayout retryView;
-    @BindView(R.id.btn_retry)
-    Button btnRetry;
     @BindView(R.id.rv_entries)
     RecyclerView recyclerView;
+    @BindView(R.id.coordinator)
+    CoordinatorLayout coordinatorLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -143,18 +142,8 @@ public class EntryListActivity extends AppCompatActivity implements EntryListVie
     }
 
     @Override
-    public void showRetry() {
-        this.retryView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideRetry() {
-        this.retryView.setVisibility(View.GONE);
-    }
-
-    @Override
     public void showError(String message) {
-        Snackbar.make(recyclerView, message, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override

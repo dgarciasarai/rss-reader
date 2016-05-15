@@ -43,7 +43,6 @@ public class EntryDetailsPresenterTest {
     public void testShouldShowLoadingIndicatorOnInitialize() {
         mPresenter.initialize();
         shouldShowLoading();
-        shouldHideRetry();
     }
 
     @Test
@@ -56,10 +55,6 @@ public class EntryDetailsPresenterTest {
     public void testShouldDestroyAllOnDestroyView(){
         this.mPresenter.onViewDestroy();
         shouldUnsubscribeInteractor();
-    }
-
-    private void shouldHideRetry() {
-        verify(mView).hideRetry();
     }
 
     private void shouldRequestEntryFromInteractor() {

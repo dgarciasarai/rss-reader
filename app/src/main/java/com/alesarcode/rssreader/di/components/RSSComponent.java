@@ -3,6 +3,7 @@ package com.alesarcode.rssreader.di.components;
 import com.alesarcode.rssreader.di.modules.ActivityModule;
 import com.alesarcode.rssreader.di.modules.RSSModule;
 import com.alesarcode.rssreader.di.scopes.PerActivity;
+import com.alesarcode.rssreader.presentation.activities.EntryDetailActivity;
 import com.alesarcode.rssreader.presentation.activities.EntryListActivity;
 
 import dagger.Component;
@@ -19,4 +20,5 @@ import dagger.Component;
 public interface RSSComponent {
 
     void inject(EntryListActivity activity);
+    void inject(EntryDetailActivity entryDetailActivity);
 }

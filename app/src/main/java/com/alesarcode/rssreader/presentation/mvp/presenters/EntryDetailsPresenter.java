@@ -1,6 +1,7 @@
 package com.alesarcode.rssreader.presentation.mvp.presenters;
 
 import com.alesarcode.rssreader.R;
+import com.alesarcode.rssreader.di.scopes.PerActivity;
 import com.alesarcode.rssreader.domain.DefaultSubscriber;
 import com.alesarcode.rssreader.domain.Feed;
 import com.alesarcode.rssreader.domain.FeedItem;
@@ -25,6 +26,7 @@ import rx.Subscriber;
  * @author Sarai Díaz García
  * @version %I%
  */
+@PerActivity
 public class EntryDetailsPresenter extends BasePresenter<EntryDetailView> {
 
     private final Interactor mInteractor;
@@ -38,7 +40,6 @@ public class EntryDetailsPresenter extends BasePresenter<EntryDetailView> {
     @Override
     public void initialize() {
         this.mView.showLoading();
-        this.mView.hideRetry();
         this.mInteractor.execute(getSubscriber());
     }
 
@@ -63,7 +64,6 @@ public class EntryDetailsPresenter extends BasePresenter<EntryDetailView> {
             @Override
             public void onError(Throwable e) {
                 mView.hideLoading();
-                mView.showRetry();
                 EntryDetailsPresenter.this.showError(new DefaultErrorBundle((Exception) e));
             }
 
