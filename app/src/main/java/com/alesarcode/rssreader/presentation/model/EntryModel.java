@@ -31,4 +31,8 @@ public class EntryModel extends Model {
     public void setImageUrl(String image) {
         this.mImageUrl = image;
     }
+
+    public int getId() {
+        return mId;
+    }
 }

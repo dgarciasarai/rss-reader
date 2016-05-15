@@ -18,10 +18,12 @@ import com.alesarcode.rssreader.RSSReaderApplication;
 import com.alesarcode.rssreader.di.components.DaggerRSSComponent;
 import com.alesarcode.rssreader.di.modules.ActivityModule;
 import com.alesarcode.rssreader.presentation.adapters.EntriesAdapter;
+import com.alesarcode.rssreader.presentation.adapters.OnEntryClickListener;
 import com.alesarcode.rssreader.presentation.model.EntryModel;
 import com.alesarcode.rssreader.presentation.model.Model;
 import com.alesarcode.rssreader.presentation.mvp.presenters.EntryListPresenter;
 import com.alesarcode.rssreader.presentation.mvp.views.EntryListView;
+import com.alesarcode.rssreader.presentation.navigation.Navigator;
 
 import java.util.Collection;
 
@@ -36,7 +38,7 @@ import butterknife.ButterKnife;
  * @author Sarai Díaz García
  * @version %I%
  */
-public class EntryListActivity extends AppCompatActivity implements EntryListView {
+public class EntryListActivity extends AppCompatActivity implements EntryListView, OnEntryClickListener {
 
     @BindView(R.id.rl_progress)
     RelativeLayout progressView;
@@ -51,6 +53,9 @@ public class EntryListActivity extends AppCompatActivity implements EntryListVie
 
     @Inject
     EntryListPresenter mPresenter;
+    @Inject
+    Navigator navigator;
+    @Inject
     EntriesAdapter mAdapter;
 
     @Override
@@ -60,7 +65,6 @@ public class EntryListActivity extends AppCompatActivity implements EntryListVie
         this.initializeInjector();
 
         ButterKnife.bind(this);
-        mAdapter = new EntriesAdapter(this);
         initializeToolbar();
         initializeRecyclerView();
         initializePresenter();
@@ -101,6 +105,7 @@ public class EntryListActivity extends AppCompatActivity implements EntryListVie
     }
 
     private void initializeRecyclerView() {
+        this.mAdapter.setOnEntryClickListener(this);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         this.recyclerView.setAdapter(mAdapter);
     }
@@ -155,5 +160,10 @@ public class EntryListActivity extends AppCompatActivity implements EntryListVie
     @Override
     public Context context() {
         return getApplicationContext();
+    }
+
+    @Override
+    public void onEntryClicked(EntryModel entry) {
+        this.navigator.navigateToEntryDetail(this, entry.getId());
     }
 }

@@ -33,6 +33,7 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
     private List<EntryModel> entriesCollection;
     private LayoutInflater layoutInflater;
     private Context mContext;
+    private OnEntryClickListener onEntryClickListener;
 
     @Inject
     public EntriesAdapter(Context context) {
@@ -49,7 +50,7 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        EntryModel entry = entriesCollection.get(position);
+        final EntryModel entry = entriesCollection.get(position);
         holder.title.setText(entry.getTitle());
 
         if (entry.getImageUrl() == null) {
@@ -63,6 +64,15 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .into(holder.image);
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (EntriesAdapter.this.onEntryClickListener != null) {
+                    EntriesAdapter.this.onEntryClickListener.onEntryClicked(entry);
+                }
+            }
+        });
     }
 
     @Override
@@ -73,6 +83,10 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
     public void setEntriesCollection(Collection<EntryModel> models) {
         this.entriesCollection = (List<EntryModel>) models;
         this.notifyDataSetChanged();
+    }
+
+    public void setOnEntryClickListener(OnEntryClickListener onEntryClickListener) {
+        this.onEntryClickListener = onEntryClickListener;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
