@@ -3,14 +3,16 @@ package com.alesarcode.rssreader.presentation.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alesarcode.rssreader.R;
 import com.alesarcode.rssreader.RSSReaderApplication;
@@ -20,6 +22,8 @@ import com.alesarcode.rssreader.di.modules.RSSModule;
 import com.alesarcode.rssreader.presentation.model.EntryModel;
 import com.alesarcode.rssreader.presentation.mvp.presenters.EntryDetailsPresenter;
 import com.alesarcode.rssreader.presentation.mvp.views.EntryDetailView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import javax.inject.Inject;
 
@@ -42,6 +46,12 @@ public class EntryDetailActivity extends AppCompatActivity implements EntryDetai
     CoordinatorLayout coordinatorLayout;
     @BindView(R.id.toolbar_detail)
     Toolbar toolbar;
+    @BindView(R.id.title_detail)
+    TextView title;
+    @BindView(R.id.description_detail)
+    TextView description;
+    @BindView(R.id.entry_image)
+    ImageView image;
 
     @Inject
     EntryDetailsPresenter mPresenter;
@@ -81,7 +91,9 @@ public class EntryDetailActivity extends AppCompatActivity implements EntryDetai
      */
     private void initializeToolbar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar supportActionBar = getSupportActionBar();
+        supportActionBar.setTitle("");
+        supportActionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -95,7 +107,20 @@ public class EntryDetailActivity extends AppCompatActivity implements EntryDetai
 
     @Override
     public void renderItem(EntryModel entry) {
+        title.setText(entry.getTitle());
+        description.setText(entry.getDescription());
 
+        if (entry.getImageUrl() == null) {
+            Glide.clear(image);
+            image.setImageDrawable(null);
+        } else {
+            Glide.with(this)
+                    .load(entry.getImageUrl())
+                    .placeholder(R.drawable.placeholder)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .into(image);
+        }
     }
 
     @Override

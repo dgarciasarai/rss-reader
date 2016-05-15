@@ -11,9 +11,14 @@ public class EntryModel extends Model {
     private final int mId;
     private String mTitle;
     private String mImageUrl;
+    private String mDescription;
 
     public EntryModel(int id) {
         this.mId = id;
+    }
+
+    public int getId() {
+        return mId;
     }
 
     public String getTitle() {
@@ -32,7 +37,11 @@ public class EntryModel extends Model {
         this.mImageUrl = image;
     }
 
-    public int getId() {
-        return mId;
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public void setDescription(String description) {
+        this.mDescription = description;
     }
 }

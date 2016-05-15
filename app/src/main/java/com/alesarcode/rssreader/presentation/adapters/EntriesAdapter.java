@@ -13,6 +13,8 @@ import com.alesarcode.rssreader.presentation.model.EntryModel;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import org.w3c.dom.Text;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -52,6 +54,7 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         final EntryModel entry = entriesCollection.get(position);
         holder.title.setText(entry.getTitle());
+        holder.description.setText(entry.getDescription());
 
         if (entry.getImageUrl() == null) {
             Glide.clear(holder.image);
@@ -91,10 +94,12 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.title)
-        TextView title;
         @BindView(R.id.image)
         ImageView image;
+        @BindView(R.id.title)
+        TextView title;
+        @BindView(R.id.description)
+        TextView description;
 
         public ViewHolder(View itemView) {
             super(itemView);
