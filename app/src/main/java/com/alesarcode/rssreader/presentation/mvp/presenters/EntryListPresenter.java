@@ -92,12 +92,12 @@ public class EntryListPresenter extends BasePresenter<EntryListView> {
                 if (lhsDate == null && rhsDate == null) {
                     return 0;
                 } else if (lhsDate == null) {
-                    return 1;
-                } else if (rhsDate == null) {
                     return -1;
+                } else if (rhsDate == null) {
+                    return 1;
                 }
 
-                return rhsDate.compareTo(lhsDate);
+                return lhsDate.compareTo(rhsDate);
             }
         });
 

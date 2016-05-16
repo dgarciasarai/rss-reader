@@ -2,6 +2,7 @@ package com.alesarcode.rssreader.data.parser;
 
 import android.support.annotation.NonNull;
 import android.text.Html;
+import android.util.Log;
 
 import com.alesarcode.rssreader.domain.Feed;
 import com.alesarcode.rssreader.domain.FeedItem;
@@ -27,11 +28,13 @@ public class RSSParserHandler extends DefaultHandler {
 
     private Feed mFeed;
     private FeedItem mCurrentItem;
-    private DateFormat formatter;
+    private DateFormat formatterPub;
+    private DateFormat formatterDc;
 
     public RSSParserHandler() {
         this.mProcessor = new StringBuilder();
-        formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US);
+        formatterPub = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US);
+        formatterDc = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
     }
 
     public Feed getFeed() {
@@ -74,12 +77,27 @@ public class RSSParserHandler extends DefaultHandler {
                     case "link":
                         this.mCurrentItem.setLink(string);
                         break;
+                    case "description":
+                        //Prefer always other descriptions
+                        if (this.mCurrentItem.getDescription() == null) {
+                            this.mCurrentItem.setDescription(clean(string));
+                        }
+                        break;
                     case "media:description":
                         this.mCurrentItem.setDescription(clean(string));
                         break;
+                    case "dc:date":
+                        //Prefer always other dates
+                        if (this.mCurrentItem.getDate() == null) {
+                            try {
+                                this.mCurrentItem.setDate(formatterDc.parse(string));
+                            } catch (ParseException e) {
+                                this.mCurrentItem.setDate(null);
+                            }
+                        }
                     case "pubdate":
                         try {
-                            this.mCurrentItem.setDate(formatter.parse(string));
+                            this.mCurrentItem.setDate(formatterPub.parse(string));
                         } catch (ParseException e) {
                             this.mCurrentItem.setDate(null);
                         }

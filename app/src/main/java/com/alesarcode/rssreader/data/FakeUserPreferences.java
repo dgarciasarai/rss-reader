@@ -16,6 +16,6 @@ public class FakeUserPreferences implements UserPreferences {
 
     @Override
     public String getFeedUrl() {
-        return "http://estaticos.marca.com/rss/portada.xml";
+        return "http://estaticos.elmundo.es/elmundo/rss/portada.xml";
     }
 }
