@@ -31,6 +31,7 @@ public class DomainToPresentationMapper {
         entryModel.setTitle(item.getTitle());
         entryModel.setImageUrl(item.getImageUrl());
         entryModel.setLink(item.getLink());
+        entryModel.setDate(item.getDate());
         entryModel.setDescription(item.getDescription());
 
         return entryModel;

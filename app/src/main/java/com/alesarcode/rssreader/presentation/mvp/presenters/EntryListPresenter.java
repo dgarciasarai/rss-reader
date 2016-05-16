@@ -12,6 +12,9 @@ import com.alesarcode.rssreader.presentation.model.Model;
 import com.alesarcode.rssreader.presentation.mvp.views.EntryListView;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -78,7 +81,25 @@ public class EntryListPresenter extends BasePresenter<EntryListView> {
      * @param feed wrapper of {@link com.alesarcode.rssreader.domain.FeedItem}.
      */
     private void showFeed(Feed feed) {
-        final List<FeedItem> feedItems = feed.getEntriesList();
+        List<FeedItem> feedItems = feed.getEntriesList();
+
+        Collections.sort(feedItems, new Comparator<FeedItem>() {
+            @Override
+            public int compare(FeedItem lhs, FeedItem rhs) {
+                Date lhsDate = lhs.getDate();
+                Date rhsDate = rhs.getDate();
+
+                if (lhsDate == null && rhsDate == null) {
+                    return 0;
+                } else if (lhsDate == null) {
+                    return 1;
+                } else if (rhsDate == null) {
+                    return -1;
+                }
+
+                return rhsDate.compareTo(lhsDate);
+            }
+        });
 
         this.mView.showFeedTitle(feed.getTitle());
 

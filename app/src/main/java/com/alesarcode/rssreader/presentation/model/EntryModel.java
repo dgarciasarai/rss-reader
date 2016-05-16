@@ -1,5 +1,7 @@
 package com.alesarcode.rssreader.presentation.model;
 
+import java.util.Date;
+
 /**
  * Class that represents a Entry in presentation layer.
  *
@@ -13,6 +15,8 @@ public class EntryModel extends Model {
     private String mImageUrl;
     private String mDescription;
     private String mLink;
+
+    private Date mDate;
 
     public EntryModel(int id) {
         this.mId = id;
@@ -34,6 +38,10 @@ public class EntryModel extends Model {
         return mImageUrl;
     }
 
+    public void setDate(Date date) {
+        this.mDate = date;
+    }
+
     public void setImageUrl(String image) {
         this.mImageUrl = image;
     }
@@ -52,5 +60,9 @@ public class EntryModel extends Model {
 
     public void setLink(String link) {
         this.mLink = link;
+    }
+
+    public Date getDate() {
+        return mDate;
     }
 }

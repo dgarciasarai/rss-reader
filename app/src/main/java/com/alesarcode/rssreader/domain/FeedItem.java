@@ -1,5 +1,7 @@
 package com.alesarcode.rssreader.domain;
 
+import java.util.Date;
+
 /**
  * Base model for Feed items.
  *
@@ -13,7 +15,7 @@ public class FeedItem {
     private String mImageUrl;
     private String mDescription;
     private String mLink;
-    private String mDate;
+    private Date mDate;
 
     public FeedItem() {
     }
@@ -50,7 +52,7 @@ public class FeedItem {
         this.mLink = link;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.mDate = date;
     }
 
@@ -60,5 +62,9 @@ public class FeedItem {
 
     public String getLink() {
         return mLink;
+    }
+
+    public Date getDate() {
+        return mDate;
     }
 }

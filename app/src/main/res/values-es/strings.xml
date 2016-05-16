@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lector RSS</string>
+    <string name="default_error_message">Ocurrió un error en la aplicación</string>
+    <string name="entries_not_found">No se encontraron entradas</string>
+    <string name="view_in_browser">Ver en el navegador</string>
+    <string name="wrong_feed">URL incorrecta</string>
+</resources>

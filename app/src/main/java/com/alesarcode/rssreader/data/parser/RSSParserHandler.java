@@ -1,11 +1,19 @@
 package com.alesarcode.rssreader.data.parser;
 
+import android.support.annotation.NonNull;
+import android.text.Html;
+
 import com.alesarcode.rssreader.domain.Feed;
 import com.alesarcode.rssreader.domain.FeedItem;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * Handler for the Feed.
@@ -19,9 +27,11 @@ public class RSSParserHandler extends DefaultHandler {
 
     private Feed mFeed;
     private FeedItem mCurrentItem;
+    private DateFormat formatter;
 
     public RSSParserHandler() {
         this.mProcessor = new StringBuilder();
+        formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US);
     }
 
     public Feed getFeed() {
@@ -59,16 +69,20 @@ public class RSSParserHandler extends DefaultHandler {
             if (this.mCurrentItem != null) {
                 switch (qName.toLowerCase()) {
                     case "title":
-                        this.mCurrentItem.setTitle(string);
+                        this.mCurrentItem.setTitle(clean(string));
                         break;
                     case "link":
                         this.mCurrentItem.setLink(string);
                         break;
                     case "media:description":
-                        this.mCurrentItem.setDescription(string);
+                        this.mCurrentItem.setDescription(clean(string));
                         break;
                     case "pubdate":
-                        this.mCurrentItem.setDate(string);
+                        try {
+                            this.mCurrentItem.setDate(formatter.parse(string));
+                        } catch (ParseException e) {
+                            this.mCurrentItem.setDate(null);
+                        }
                         break;
                     default:
                         break;
@@ -79,6 +93,11 @@ public class RSSParserHandler extends DefaultHandler {
 
             this.mProcessor.setLength(0);
         }
+    }
+
+    @NonNull
+    private String clean(String string) {
+        return Html.fromHtml(string).toString();
     }
 
     @Override
