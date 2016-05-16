@@ -17,5 +17,5 @@ This app has been developed using MVP architecture (Model-View-Presenter). For i
 
 TDD was used for the fist stages of the development: interactors and presenters.
 
-![RecyclerView with feed items](/img/List.png)
-![RecyclerView with feed items](/img/Detail.png)
+<img src="/img/List.png" width="300px"/>
+<img src="/img/Detail.png" width="300px"/>
