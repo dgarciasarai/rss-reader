@@ -52,7 +52,7 @@ public class RSSDataSource implements RSSRepository {
                     subscriber.onError(e);
                 }
 
-                mList.addAll(feed.getEntriesList());
+                mList = feed.getEntriesList();
 
                 subscriber.onNext(feed);
                 subscriber.onCompleted();

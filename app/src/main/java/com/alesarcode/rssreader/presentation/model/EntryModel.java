@@ -12,6 +12,7 @@ public class EntryModel extends Model {
     private String mTitle;
     private String mImageUrl;
     private String mDescription;
+    private String mLink;
 
     public EntryModel(int id) {
         this.mId = id;
@@ -43,5 +44,13 @@ public class EntryModel extends Model {
 
     public void setDescription(String description) {
         this.mDescription = description;
+    }
+
+    public String getLink() {
+        return mLink;
+    }
+
+    public void setLink(String link) {
+        this.mLink = link;
     }
 }

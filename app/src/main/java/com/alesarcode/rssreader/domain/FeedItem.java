@@ -57,4 +57,8 @@ public class FeedItem {
     public void setId(int id) {
         this.mId = id;
     }
+
+    public String getLink() {
+        return mLink;
+    }
 }

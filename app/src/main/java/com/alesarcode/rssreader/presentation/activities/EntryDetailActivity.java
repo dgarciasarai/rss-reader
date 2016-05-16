@@ -1,6 +1,8 @@
 package com.alesarcode.rssreader.presentation.activities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -8,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -56,6 +59,8 @@ public class EntryDetailActivity extends AppCompatActivity implements EntryDetai
     @Inject
     EntryDetailsPresenter mPresenter;
 
+    private EntryModel mEntry;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,15 +103,33 @@ public class EntryDetailActivity extends AppCompatActivity implements EntryDetai
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-            return true;
+        int itemId = item.getItemId();
+        switch (itemId) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            case R.id.action_view_in_browser:
+                if (mEntry != null && mEntry.getLink() != null) {
+                    Intent browserIntent = new Intent(
+                            Intent.ACTION_VIEW, Uri.parse(mEntry.getLink()));
+                    startActivity(browserIntent);
+                }
+                break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
+
+        return true;
+    }
+
+    @Override
     public void renderItem(EntryModel entry) {
+        this.mEntry = entry;
         title.setText(entry.getTitle());
         description.setText(entry.getDescription());
 

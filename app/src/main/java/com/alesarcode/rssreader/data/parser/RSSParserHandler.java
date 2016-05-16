@@ -37,6 +37,10 @@ public class RSSParserHandler extends DefaultHandler {
             this.mCurrentItem = new FeedItem();
             this.mFeed.addItem(this.mCurrentItem);
             this.mCurrentItem.setId(this.mFeed.getEntriesList().size());
+        } else if (localName.equalsIgnoreCase("content")
+                && qName.equalsIgnoreCase("media:content")
+                && attributes.getValue("type").contains("image")) {
+            this.mCurrentItem.setImageUrl(attributes.getValue("url"));
         }
     }
 
@@ -60,7 +64,7 @@ public class RSSParserHandler extends DefaultHandler {
                     case "link":
                         this.mCurrentItem.setLink(string);
                         break;
-                    case "description":
+                    case "media:description":
                         this.mCurrentItem.setDescription(string);
                         break;
                     case "pubdate":
