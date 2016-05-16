@@ -2,4 +2,5 @@
     <string name="app_name">RSS Reader</string>
     <string name="default_error_message">There was an application error</string>
     <string name="entries_not_found">Not entries found in this RSS feed</string>
+    <string name="wrong_feed">The selected URL is not a correct feed</string>
 </resources>

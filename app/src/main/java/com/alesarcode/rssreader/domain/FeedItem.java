@@ -12,12 +12,10 @@ public class FeedItem {
     private String mTitle;
     private String mImageUrl;
     private String mDescription;
+    private String mLink;
+    private String mDate;
 
-    public FeedItem(int id, String title, String imageUrl, String description) {
-        this.mId = id;
-        mTitle = title;
-        mImageUrl = imageUrl;
-        mDescription = description;
+    public FeedItem() {
     }
 
     public int getId() {
@@ -34,5 +32,29 @@ public class FeedItem {
 
     public String getDescription() {
         return mDescription;
+    }
+
+    public void setTitle(String title) {
+        this.mTitle = title;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.mImageUrl = imageUrl;
+    }
+
+    public void setDescription(String description) {
+        this.mDescription = description;
+    }
+
+    public void setLink(String link) {
+        this.mLink = link;
+    }
+
+    public void setDate(String date) {
+        this.mDate = date;
+    }
+
+    public void setId(int id) {
+        this.mId = id;
     }
 }

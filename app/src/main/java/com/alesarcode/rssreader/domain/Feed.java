@@ -1,5 +1,6 @@
 package com.alesarcode.rssreader.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,9 +14,7 @@ public class Feed {
     private List<FeedItem> mList;
     private String mTitle;
 
-    public Feed(String title, List<FeedItem> list) {
-        this.mList = list;
-        this.mTitle = title;
+    public Feed() {
     }
 
     public String getTitle() {
@@ -24,5 +23,20 @@ public class Feed {
 
     public List<FeedItem> getEntriesList() {
         return mList;
+    }
+
+    public void setItems(List<FeedItem> list) {
+        this.mList = list;
+    }
+
+    public void setTitle(String title) {
+        this.mTitle = title;
+    }
+
+    public void addItem(FeedItem item) {
+        if (mList == null) {
+            mList = new ArrayList<>();
+        }
+        mList.add(item);
     }
 }

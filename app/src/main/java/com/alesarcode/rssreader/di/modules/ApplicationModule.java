@@ -1,8 +1,9 @@
 package com.alesarcode.rssreader.di.modules;
 
 import com.alesarcode.rssreader.RSSReaderApplication;
-import com.alesarcode.rssreader.data.repository.FakeDataSource;
-import com.alesarcode.rssreader.di.scopes.PerActivity;
+import com.alesarcode.rssreader.data.FakeUserPreferences;
+import com.alesarcode.rssreader.data.UserPreferences;
+import com.alesarcode.rssreader.data.repository.RSSDataSource;
 import com.alesarcode.rssreader.domain.repository.RSSRepository;
 import com.alesarcode.rssreader.presentation.navigation.AndroidNavigator;
 import com.alesarcode.rssreader.presentation.navigation.Navigator;
@@ -37,8 +38,13 @@ public class ApplicationModule {
     }
 
     @Provides @Singleton
-    RSSRepository providesFeedRepository(FakeDataSource fakeDataSource) {
-        return fakeDataSource;
+    RSSRepository providesFeedRepository(RSSDataSource RSSDataSource) {
+        return RSSDataSource;
+    }
+
+    @Provides @Singleton
+    UserPreferences providesUserPreferences(FakeUserPreferences fakeUserPreferences) {
+        return fakeUserPreferences;
     }
 
     @Provides @Singleton
